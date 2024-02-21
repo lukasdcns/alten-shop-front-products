@@ -1,0 +1,19 @@
+<form #addProductForm='ngForm' class="app-add-product-form">
+  <div class="form-item">
+    <label for="name">Name</label>
+    <input #name='ngModel' [(ngModel)]="product.name" class="form-control" id="name" name="name" pattern="^[a-zA-Zàéèç]{1,25}$" required type="text">
+    <div [hidden]="name.valid || name.pristine" class="card-panel red accent-1">
+      The name of the product is required (1-25).
+    </div>
+  </div>
+
+  <div class="form-item">
+    <label for="name">Code</label>
+    <input #code='ngModel' [(ngModel)]="product.code" class="form-control" id="code" name="code" pattern="^[a-zA-Zàéèç]{1,10}$" required type="text">
+    <div [hidden]="name.valid || name.pristine" class="card-panel red accent-1">
+      The code of the product is required (1-25).
+    </div>
+  </div>
+
+    <p-button label="Submit" (click)="onSubmit()" [disabled]="!addProductForm.form.valid" type="submit"></p-button>
+</form>

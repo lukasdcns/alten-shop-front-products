@@ -8,16 +8,23 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
 import { BaseModule } from 'app/base/base.module';
 import { SharedModule } from 'app/shared/shared.module';
+import {PageNotFoundComponent} from './page_not_found.component';
+import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from './in_memory-data.service';
+import {AdminModule} from './pages/admin/admin.module';
+import {PagesModule} from './pages/pages.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
     BrowserAnimationsModule,
     SharedModule,
-    BaseModule
+    BaseModule,
+    PagesModule,
+    AppRoutingModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'en' }

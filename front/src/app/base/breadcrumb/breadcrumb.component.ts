@@ -16,7 +16,10 @@ export class BreadcrumbComponent implements OnInit {
   @Input() public lang = 'en';
   public items: MenuItem[] = [];
   private readonly sidenavItems: SidenavItem[] = SIDENAV_ITEMS;
+
   private homeItem: MenuItem = { label: 'Home', routerLink: '/' };
+  private adminItem: MenuItem = { label: 'Admin', routerLink: '/admin/products' };
+  private productItem: MenuItem = { label: 'Products', routerLink: '/products' };
 
   constructor(
     private readonly sidenavService: SidenavService,
@@ -26,11 +29,11 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.pipe(      
+    this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map((event: NavigationEnd) => event.url),
       startWith(this.router.url),
-      tap(() => this.items = [this.homeItem])
+      tap(() => this.items = [this.homeItem, this.adminItem, this.productItem])
     ).subscribe((url) => {
       this.buildBreadcrumb(url);
     });
